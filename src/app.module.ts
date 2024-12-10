@@ -1,23 +1,35 @@
 import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSource } from '../ormconfig';
+import { AuthModule } from './auth/auth.module';
+
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
 import { ConvocatoriasModule } from './convocatorias/convocatorias.module';
-import { AuthModule } from './auth/auth.module';
-// import { NestjsFormDataModule } from 'nestjs-form-data';
+import { EstudiantesModule } from './estudiantes/estudiantes.module';
+import { CobrosModule } from './cobros/cobros.module';
+import { BeneficiariosModule } from './beneficiarios/beneficiarios.module';
+import { SolicitudesModule } from './solicitudes/solicitudes.module';
+import { CuestionariosModule } from './cuestionarios/cuestionarios.module';
+import { PreguntasModule } from './preguntas/preguntas.module';
+import { RespuestasModule } from './respuestas/respuestas.module';
+import { ProgramacionesModule } from './programaciones/programaciones.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(AppDataSource.options),
-    AuthModule,
     UsuariosModule,
     RolesModule,
     ConvocatoriasModule,
+    EstudiantesModule,
+    CobrosModule,
+    BeneficiariosModule,
+    AuthModule,
+    SolicitudesModule,
+    CuestionariosModule,
+    PreguntasModule,
+    RespuestasModule,
+    ProgramacionesModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

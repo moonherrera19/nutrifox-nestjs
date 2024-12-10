@@ -8,5 +8,6 @@ export const AppDataSource = new DataSource({
   password: '12345', // Reemplaza con tu contraseña
   database: 'nutrifox',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  synchronize: true, // Solo para desarrollo, NO en producción
+  synchronize: true, // Solo para desarrollo, NO en producción,
+  logging: true
 });

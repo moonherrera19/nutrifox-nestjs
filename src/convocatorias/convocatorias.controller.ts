@@ -6,7 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ConvocatoriasService } from './convocatorias.service';
 import { CreateConvocatoriaDto } from './dto/create-convocatoria.dto';
 import { UpdateConvocatoriaDto } from './dto/update-convocatoria.dto';
@@ -14,7 +16,7 @@ import { FormDataRequest } from 'nestjs-form-data';
 
 @Controller('convocatorias')
 export class ConvocatoriasController {
-  constructor(private readonly convocatoriasService: ConvocatoriasService) {}
+  constructor(private readonly convocatoriasService: ConvocatoriasService) { }
 
   @Post()
   @FormDataRequest()
@@ -23,6 +25,7 @@ export class ConvocatoriasController {
     return this.convocatoriasService.create(createConvocatoriaDto);
   }
 
+  // @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll() {
     return this.convocatoriasService.findAll();
@@ -33,6 +36,7 @@ export class ConvocatoriasController {
     return this.convocatoriasService.findOne(+id);
   }
 
+  @FormDataRequest()
   @Patch(':id')
   update(
     @Param('id') id: string,

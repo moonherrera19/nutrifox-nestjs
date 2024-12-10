@@ -9,5 +9,6 @@ import { Convocatoria } from '../entities/convocatoria.entity'; // Importa la en
   imports: [TypeOrmModule.forFeature([Convocatoria]), NestjsFormDataModule], // Registra la entidad
   controllers: [ConvocatoriasController],
   providers: [ConvocatoriasService],
+  exports: [ConvocatoriasService],
 })
 export class ConvocatoriasModule {}

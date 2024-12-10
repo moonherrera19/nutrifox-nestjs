@@ -1,4 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Cobro } from './cobro.entity';
+import { Beneficiario } from './beneficiario.entity';
+import { Solicitud } from './solicitud.entity';
 // import { Beneficiario } from './beneficiario.entity';
 // import { Solicitud } from './solicitud.entity';
 
@@ -22,15 +25,18 @@ export class Convocatoria {
   @Column({ type: 'boolean' })
   estatus: boolean;
 
-  @Column({ type: 'blob', nullable: true })
+  @Column({ type: 'mediumblob', nullable: false })
   imagen: Buffer;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   nombre: string;
 
-  //   @OneToMany(() => Beneficiario, (beneficiario) => beneficiario.convocatoria)
-  //   beneficiarios: Beneficiario[];
+  @OneToMany(() => Cobro, (cobro) => cobro.convocatoria) // Agregar esta línea
+  cobros: Cobro[];
 
-  //   @OneToMany(() => Solicitud, (solicitud) => solicitud.convocatoria)
-  //   solicitudes: Solicitud[];
+  @OneToMany(() => Beneficiario, (beneficiario) => beneficiario.convocatoria)
+  beneficiarios: Beneficiario[];
+
+  @OneToMany(() => Solicitud, (solicitud) => solicitud.convocatoria)
+  solicitudes: Solicitud[];
 }
