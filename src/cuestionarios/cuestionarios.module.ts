@@ -8,6 +8,7 @@ import { Cuestionario } from '../entities/cuestionario.entity';
 @Module({
     imports: [TypeOrmModule.forFeature([Cuestionario]), NestjsFormDataModule],
     controllers: [CuestionariosController],
-    providers: [CuestionariosService]
+    providers: [CuestionariosService],
+    exports: [TypeOrmModule]
 })
 export class CuestionariosModule { }

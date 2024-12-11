@@ -1,14 +1,19 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SolicitudesService } from './solicitudes.service';
-import { CreateSolicitudDto } from './dto/create-solicitud.dto';
+import { CreateSolicitudDto, RespuestaDto } from './dto/create-solicitud.dto';
 import { UpdateSolicitudDto } from './dto/update-solicitud.dto';
+import { FormDataRequest } from 'nestjs-form-data';
 
 @Controller('solicitudes')
 export class SolicitudesController {
     constructor(private readonly solicitudesService: SolicitudesService) { }
 
     @Post()
+    @FormDataRequest()
     create(@Body() createSolicitudDto: CreateSolicitudDto) {
+        createSolicitudDto.respuestas = createSolicitudDto.respuestas.map(
+            (respuesta: any) => JSON.parse(respuesta),
+        );
         return this.solicitudesService.create(createSolicitudDto);
     }
 
@@ -20,6 +25,11 @@ export class SolicitudesController {
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.solicitudesService.findOne(+id);
+    }
+
+    @Get('/usuario/:idUsuario')
+    findByUsuario(@Param('idUsuario') idUsuario: string) {
+        return this.solicitudesService.findByUsuario(+idUsuario);
     }
 
     @Patch(':id')

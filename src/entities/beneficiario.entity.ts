@@ -15,14 +15,14 @@ export class Beneficiario {
 
     @ManyToOne(() => Estudiante, (estudiante) => estudiante.beneficiarios, {
         nullable: false,
-        cascade: true,
+        onDelete: 'CASCADE'
     })
     @JoinColumn({ name: 'idEstudiante' })
     estudiante: Estudiante;
 
     @ManyToOne(() => Convocatoria, (convocatoria) => convocatoria.beneficiarios, {
         nullable: false,
-        cascade: true,
+        onDelete: 'CASCADE'
     })
     @JoinColumn({ name: 'idConvocatoria' })
     convocatoria: Convocatoria;
